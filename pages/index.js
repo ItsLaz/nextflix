@@ -6,6 +6,7 @@ import Navbar from '../components/Navbar/Navbar';
 import Card from '../components/Card/Card';
 
 import styles from '../styles/Home.module.css';
+import SectionCards from '../components/SectionCards/SectionCards';
 
 export default function Home() {
     return (
@@ -26,7 +27,7 @@ export default function Home() {
                 imgUrl="/static/shrek.jpg"
             />
 
-            <Card imgUrl="/static/shrek.jpg" size="large" />
+            <SectionCards title="Disney" />
             <Card imgUrl="/static/shrek.jpg" size="medium" />
             <Card imgUrl="/static/shrek.jpg" size="small" />
         </div>
