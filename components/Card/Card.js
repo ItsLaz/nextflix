@@ -3,16 +3,25 @@ import styles from './Card.module.css';
 import Image from 'next/image';
 
 const Card = (props) => {
-    const { imgUrl, size } = props;
+    const { imgUrl, size = 'medium' } = props;
+
+    const classMap = {
+        large: styles.lgItem,
+        medium: styles.mdItem,
+        small: styles.smItem,
+    };
 
     return (
-        <div>
-            <Image
-                src={imgUrl}
-                alt="movie poster"
-                width="250px"
-                height="400px"
-            />
+        <div className={styles.container}>
+            Card
+            <div className={classMap[size]}>
+                <Image
+                    src={imgUrl}
+                    alt="movie poster"
+                    layout="fill"
+                    className={styles.cardImg}
+                />
+            </div>
         </div>
     );
 };
