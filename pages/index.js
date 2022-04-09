@@ -3,6 +3,8 @@ import Image from 'next/image';
 
 import Banner from '../components/banner/Banner';
 import Navbar from '../components/Navbar/Navbar';
+import Card from '../components/Card/Card';
+
 import styles from '../styles/Home.module.css';
 
 export default function Home() {
@@ -23,6 +25,10 @@ export default function Home() {
                 subTitle="big green ogre AUUUGHH"
                 imgUrl="/static/shrek.jpg"
             />
+
+            <Card imgUrl="/static/shrek.jpg" size="large" />
+            <Card imgUrl="/static/shrek.jpg" size="medium" />
+            <Card imgUrl="/static/shrek.jpg" size="small" />
         </div>
     );
 }
