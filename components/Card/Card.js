@@ -27,7 +27,6 @@ const Card = (props) => {
 
     return (
         <div className={styles.container}>
-            Card
             <motion.div
                 className={cls(classMap[size], styles.imgMotionWrapper)}
                 whileHover={{ scale: 1.2 }}

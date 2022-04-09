@@ -21,6 +21,7 @@ export default function Home() {
             </Head>
 
             <Navbar username="joe@mama.com" />
+
             <Banner
                 title="Shrek"
                 subTitle="big green ogre AUUUGHH"
@@ -28,8 +29,6 @@ export default function Home() {
             />
 
             <SectionCards title="Disney" />
-            <Card imgUrl="/static/shrek.jpg" size="medium" />
-            <Card imgUrl="/static/shrek.jpg" size="small" />
         </div>
     );
 }
