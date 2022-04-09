@@ -3,23 +3,22 @@ import styles from './SectionCards.module.css';
 import Card from '../Card/Card';
 
 const SectionCards = (props) => {
-    const { title } = props;
+    const { title, videos, size } = props;
+
     return (
         <section className={styles.container}>
             <h2 className={styles.title}>{title}</h2>
             <div className={styles.cardWrapper}>
-                <Card id={0} imgUrl="/static/shrek.jpg" size="large" />
-                <Card imgUrl="/static/shrek.jpg" size="large" />
-                <Card imgUrl="/static/shrek.jpg" size="large" />
-                <Card imgUrl="/static/shrek.jpg" size="large" />
-                <Card imgUrl="/static/shrek.jpg" size="large" />
-                <Card imgUrl="/static/shrek.jpg" size="large" />
-                <Card imgUrl="/static/shrek.jpg" size="large" />
-                <Card imgUrl="/static/shrek.jpg" size="large" />
-                <Card imgUrl="/static/shrek.jpg" size="large" />
-                <Card imgUrl="/static/shrek.jpg" size="large" />
-                <Card imgUrl="/static/shrek.jpg" size="large" />
-                <Card imgUrl="/static/shrek.jpg" size="large" />
+                {videos.map((video, i) => {
+                    return (
+                        <Card
+                            id={i}
+                            imgUrl={video.imgUrl}
+                            size={size}
+                            key={i}
+                        />
+                    );
+                })}
             </div>
         </section>
     );

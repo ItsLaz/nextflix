@@ -9,6 +9,17 @@ import styles from '../styles/Home.module.css';
 import SectionCards from '../components/SectionCards/SectionCards';
 
 export default function Home() {
+    const disneyVideos = [
+        {
+            imgUrl: '/static/shrek.jpg',
+        },
+        {
+            imgUrl: '/static/shrek.jpg',
+        },
+        {
+            imgUrl: '/static/shrek.jpg',
+        },
+    ];
     return (
         <div className={styles.container}>
             <Head>
@@ -29,7 +40,16 @@ export default function Home() {
             />
 
             <div className={styles.sectionWrapper}>
-                <SectionCards title="Disney" />
+                <SectionCards
+                    title="Disney"
+                    videos={disneyVideos}
+                    size="large"
+                />
+                <SectionCards
+                    title="Productivity"
+                    videos={disneyVideos}
+                    size="medium"
+                />
             </div>
         </div>
     );
