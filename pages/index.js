@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import Image from 'next/image';
+
 import Banner from '../components/banner/Banner';
 import Navbar from '../components/Navbar/Navbar';
 import styles from '../styles/Home.module.css';
@@ -16,7 +17,7 @@ export default function Home() {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <Navbar />
+            <Navbar username="joe@mama.com" />
             <Banner
                 title="Shrek"
                 subTitle="big green ogre AUUUGHH"
