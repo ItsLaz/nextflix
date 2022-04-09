@@ -28,7 +28,9 @@ export default function Home() {
                 imgUrl="/static/shrek.jpg"
             />
 
-            <SectionCards title="Disney" />
+            <div className={styles.sectionWrapper}>
+                <SectionCards title="Disney" />
+            </div>
         </div>
     );
 }

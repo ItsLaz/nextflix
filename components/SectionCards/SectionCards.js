@@ -8,7 +8,7 @@ const SectionCards = (props) => {
         <section className={styles.container}>
             <h2 className={styles.title}>{title}</h2>
             <div className={styles.cardWrapper}>
-                <Card imgUrl="/static/shrek.jpg" size="large" />
+                <Card id={0} imgUrl="/static/shrek.jpg" size="large" />
                 <Card imgUrl="/static/shrek.jpg" size="large" />
                 <Card imgUrl="/static/shrek.jpg" size="large" />
                 <Card imgUrl="/static/shrek.jpg" size="large" />
