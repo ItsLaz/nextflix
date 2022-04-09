@@ -44,11 +44,10 @@
     list-style: none;
 }
 
-.navItem {
+.navItem1 {
     font-weight: 600;
     font-size: 1rem;
     cursor: pointer;
-    margin-right: 0.75rem;
 }
 
 .navItem2 {
@@ -77,8 +76,6 @@
     margin-left: auto;
     margin-top: 0.5rem;
     padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-    padding-right: 0.5rem;
     background-color: var(--black50);
     border-width: 1px;
     color: var(--white);
@@ -104,10 +101,6 @@
     cursor: pointer;
 }
 
-.linkName:hover {
-    text-decoration: underline;
-}
-
 .lineWrapper {
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
@@ -127,9 +120,5 @@
 
     .navItems {
         margin-left: 3rem;
-    }
-
-    .navItem {
-        margin-right: 1.25rem;
     }
 }
