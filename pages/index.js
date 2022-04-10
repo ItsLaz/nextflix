@@ -10,6 +10,7 @@ import { getVideos } from '../lib/videos';
 
 export default function Home() {
     const disneyVideos = getVideos();
+
     return (
         <div className={styles.container}>
             <Head>
