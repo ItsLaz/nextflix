@@ -1,25 +1,15 @@
 import Head from 'next/head';
-import Image from 'next/image';
 
 import Banner from '../components/banner/Banner';
 import Navbar from '../components/Navbar/Navbar';
-import Card from '../components/Card/Card';
 
 import styles from '../styles/Home.module.css';
 import SectionCards from '../components/SectionCards/SectionCards';
 
+import { getVideos } from '../lib/videos';
+
 export default function Home() {
-    const disneyVideos = [
-        {
-            imgUrl: '/static/shrek.jpg',
-        },
-        {
-            imgUrl: '/static/shrek.jpg',
-        },
-        {
-            imgUrl: '/static/shrek.jpg',
-        },
-    ];
+    const disneyVideos = getVideos();
     return (
         <div className={styles.container}>
             <Head>
