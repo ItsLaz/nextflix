@@ -7,18 +7,23 @@ import styles from '../styles/Home.module.css';
 import SectionCards from '../components/SectionCards/SectionCards';
 
 import { getVideos } from '../lib/videos';
+import requests from '../lib/requests';
 
 export async function getServerSideProps() {
-    const videos = await getVideos();
+    const popular = await getVideos('popular');
+    const upcoming = await getVideos('upcoming');
+    const topRated = await getVideos('top_rated');
 
     return {
         props: {
-            videos,
+            popular,
+            upcoming,
+            topRated,
         },
     };
 }
 
-export default function Home({ videos }) {
+export default function Home({ upcoming, popular, topRated }) {
     return (
         <div className={styles.container}>
             <Head>
@@ -39,10 +44,15 @@ export default function Home({ videos }) {
             />
 
             <div className={styles.sectionWrapper}>
-                <SectionCards title="Disney" videos={videos} size="large" />
+                <SectionCards title="Popular" videos={popular} size="large" />
                 <SectionCards
-                    title="Productivity"
-                    videos={videos}
+                    title="Upcoming"
+                    videos={upcoming}
+                    size="medium"
+                />
+                <SectionCards
+                    title="Top Rated"
+                    videos={topRated}
                     size="medium"
                 />
             </div>
