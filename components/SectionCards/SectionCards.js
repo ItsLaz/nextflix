@@ -3,7 +3,7 @@ import styles from './SectionCards.module.css';
 import Card from '../Card/Card';
 
 const SectionCards = (props) => {
-    const { title, videos, size } = props;
+    const { title, videos = [], size } = props;
 
     return (
         <section className={styles.container}>
