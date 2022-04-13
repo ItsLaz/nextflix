@@ -59,55 +59,57 @@ export default function Home({
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
-            <Navbar username="joe@mama.com" />
+            <div className={styles.main}>
+                <Navbar username="joe@mama.com" />
 
-            <Banner
-                title="Shrek"
-                subTitle="big green ogre AUUUGHH"
-                imgUrl="/static/shrek.jpg"
-            />
+                <Banner
+                    title="Shrek"
+                    subTitle="big green ogre AUUUGHH"
+                    imgUrl="/static/shrek.jpg"
+                />
 
-            <div className={styles.sectionWrapper}>
-                <SectionCards
-                    title="Netflix Originals"
-                    videos={netflixOriginals}
-                    size="large"
-                />
-                <SectionCards
-                    title="Trending"
-                    videos={trending}
-                    size="medium"
-                />
-                <SectionCards
-                    title="Top Rated"
-                    videos={topRated}
-                    size="small"
-                />
-                <SectionCards
-                    title="Action"
-                    videos={actionMovies}
-                    size="small"
-                />
-                <SectionCards
-                    title="Comedy"
-                    videos={comedyMovies}
-                    size="small"
-                />
-                <SectionCards
-                    title="Horror"
-                    videos={horrorMovies}
-                    size="small"
-                />
-                <SectionCards
-                    title="romance"
-                    videos={romanceMovies}
-                    size="small"
-                />
-                <SectionCards
-                    title="Documentaries"
-                    videos={documentariesMovies}
-                    size="small"
-                />
+                <div className={styles.sectionWrapper}>
+                    <SectionCards
+                        title="Netflix Originals"
+                        videos={netflixOriginals}
+                        size="large"
+                    />
+                    <SectionCards
+                        title="Trending"
+                        videos={trending}
+                        size="medium"
+                    />
+                    <SectionCards
+                        title="Top Rated"
+                        videos={topRated}
+                        size="medium"
+                    />
+                    <SectionCards
+                        title="Action"
+                        videos={actionMovies}
+                        size="small"
+                    />
+                    <SectionCards
+                        title="Comedy"
+                        videos={comedyMovies}
+                        size="small"
+                    />
+                    <SectionCards
+                        title="Horror"
+                        videos={horrorMovies}
+                        size="small"
+                    />
+                    <SectionCards
+                        title="Romance"
+                        videos={romanceMovies}
+                        size="small"
+                    />
+                    <SectionCards
+                        title="Documentaries"
+                        videos={documentariesMovies}
+                        size="small"
+                    />
+                </div>
             </div>
         </div>
     );
