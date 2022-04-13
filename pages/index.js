@@ -6,24 +6,48 @@ import Navbar from '../components/Navbar/Navbar';
 import styles from '../styles/Home.module.css';
 import SectionCards from '../components/SectionCards/SectionCards';
 
-import { getVideos } from '../lib/videos';
+import {
+    getNetflixOriginals,
+    getTopRated,
+    getTrending,
+    getVideos,
+} from '../lib/videos';
 import requests from '../lib/requests';
 
 export async function getServerSideProps() {
-    const popular = await getVideos('popular');
-    const upcoming = await getVideos('upcoming');
-    const topRated = await getVideos('top_rated');
+    const trending = await getTrending();
+    const netflixOriginals = await getNetflixOriginals();
+    const topRated = await getTopRated();
+    const actionMovies = await getVideos(requests.fetchActionMovies);
+    const comedyMovies = await getVideos(requests.fetchComedyMovies);
+    const horrorMovies = await getVideos(requests.fetchHorrorMovies);
+    const romanceMovies = await getVideos(requests.fetchRomanceMovies);
+    const documentariesMovies = await getVideos(requests.fetchDocumentaries);
 
     return {
         props: {
-            popular,
-            upcoming,
-            topRated,
+            trending: JSON.parse(JSON.stringify(trending)),
+            netflixOriginals: JSON.parse(JSON.stringify(netflixOriginals)),
+            topRated: topRated,
+            actionMovies,
+            comedyMovies,
+            horrorMovies,
+            romanceMovies,
+            documentariesMovies,
         },
     };
 }
 
-export default function Home({ upcoming, popular, topRated }) {
+export default function Home({
+    trending,
+    netflixOriginals,
+    topRated,
+    actionMovies,
+    comedyMovies,
+    horrorMovies,
+    romanceMovies,
+    documentariesMovies,
+}) {
     return (
         <div className={styles.container}>
             <Head>
@@ -44,16 +68,45 @@ export default function Home({ upcoming, popular, topRated }) {
             />
 
             <div className={styles.sectionWrapper}>
-                <SectionCards title="Popular" videos={popular} size="large" />
                 <SectionCards
-                    title="Upcoming"
-                    videos={upcoming}
+                    title="Netflix Originals"
+                    videos={netflixOriginals}
+                    size="large"
+                />
+                <SectionCards
+                    title="Trending"
+                    videos={trending}
                     size="medium"
                 />
                 <SectionCards
                     title="Top Rated"
                     videos={topRated}
-                    size="medium"
+                    size="small"
+                />
+                <SectionCards
+                    title="Action"
+                    videos={actionMovies}
+                    size="small"
+                />
+                <SectionCards
+                    title="Comedy"
+                    videos={comedyMovies}
+                    size="small"
+                />
+                <SectionCards
+                    title="Horror"
+                    videos={horrorMovies}
+                    size="small"
+                />
+                <SectionCards
+                    title="romance"
+                    videos={romanceMovies}
+                    size="small"
+                />
+                <SectionCards
+                    title="Documentaries"
+                    videos={documentariesMovies}
+                    size="small"
                 />
             </div>
         </div>
