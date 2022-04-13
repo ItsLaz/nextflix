@@ -29,6 +29,7 @@
 .logoWrapper {
     color: var(--red);
     width: 8rem;
+    cursor: pointer;
 }
 
 .navItems {
