@@ -7,6 +7,8 @@ import { useState } from 'react';
 
 import styles from '../styles/Login.module.css';
 
+import { magic } from '../lib/magic-client';
+
 const Login = () => {
     const [userMsg, setUserMsg] = useState('');
     const [email, setEmail] = useState('');
@@ -19,13 +21,21 @@ const Login = () => {
         setEmail(email);
     };
 
-    const handleLoginWithEmail = (e) => {
+    const handleLoginWithEmail = async (e) => {
         e.preventDefault();
 
         if (email) {
             // go to dashboard
-            if (email === 'a@admin.com') {
-                router.push('/');
+            if (email) {
+                try {
+                    const didToken = await magic.auth.loginWithMagicLink({
+                        email,
+                    });
+                    console.log({ didToken });
+                } catch (error) {
+                    console.error('login error', error);
+                }
+                // router.push('/');
             } else {
                 setUserMsg('Something went wrong logging in');
             }
