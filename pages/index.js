@@ -6,6 +6,8 @@ import Navbar from '../components/Navbar/Navbar';
 import styles from '../styles/Home.module.css';
 import SectionCards from '../components/SectionCards/SectionCards';
 
+import { magic } from '../lib/magic-client';
+
 import {
     getNetflixOriginals,
     getTopRated,
