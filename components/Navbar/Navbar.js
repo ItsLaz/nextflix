@@ -17,7 +17,9 @@ const Navbar = () => {
         const fetchEmail = async () => {
             try {
                 const { email } = await magic.user.getMetadata();
-                setUsername(email);
+                if (email) {
+                    setUsername(email);
+                }
             } catch (error) {
                 console.error('Error retrieving email', error);
             }
