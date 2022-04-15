@@ -62,7 +62,7 @@ export default function Home({
             </Head>
 
             <div className={styles.main}>
-                <Navbar username="joe@mama.com" />
+                <Navbar />
 
                 <Banner
                     title="Shrek"
