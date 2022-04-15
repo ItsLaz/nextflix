@@ -9,18 +9,18 @@ import Loading from '../components/Loading/Loading';
 
 function MyApp({ Component, pageProps }) {
     const router = useRouter();
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        // const isLogged = async () => {
-        //     const isLoggedIn = await magic.user.isLoggedIn();
-        //     if (isLoggedIn) {
-        //         router.push('/');
-        //     } else {
-        //         router.push('/login');
-        //     }
-        // };
-        // isLogged();
+        const isLogged = async () => {
+            const isLoggedIn = await magic.user.isLoggedIn();
+            if (isLoggedIn) {
+                router.push('/');
+            } else {
+                router.push('/login');
+            }
+        };
+        isLogged();
     }, []);
 
     useEffect(() => {
