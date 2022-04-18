@@ -14,6 +14,7 @@ export async function getStaticProps(context) {
     return {
         props: {
             youtubeVideo,
+            videoId,
         },
         revalidate: 10,
     };
@@ -27,7 +28,7 @@ export async function getStaticPaths() {
     return { paths, fallback: 'blocking' };
 }
 
-const Video = ({ youtubeVideo }) => {
+const Video = ({ youtubeVideo, videoId }) => {
     const router = useRouter();
     console.log(router.query);
     console.log(youtubeVideo);
@@ -50,7 +51,7 @@ const Video = ({ youtubeVideo }) => {
                     type="text/html"
                     width="100%"
                     height="390"
-                    src="http://www.youtube.com/embed/M7lc1UVf-VE?enablejsapi=1&origin=http://example.com&controls=0&rel=0"
+                    src={`http://www.youtube.com/embed/${videoId}?enablejsapi=1&origin=http://example.com&controls=0&rel=0`}
                     frameBorder="0"
                 ></iframe>
 
