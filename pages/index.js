@@ -30,12 +30,14 @@ export async function getServerSideProps() {
         props: {
             trending: JSON.parse(JSON.stringify(trending)),
             netflixOriginals: JSON.parse(JSON.stringify(netflixOriginals)),
-            topRated: topRated,
-            actionMovies,
-            comedyMovies,
-            horrorMovies,
-            romanceMovies,
-            documentariesMovies,
+            topRated: JSON.parse(JSON.stringify(topRated)),
+            actionMovies: JSON.parse(JSON.stringify(actionMovies)),
+            comedyMovies: JSON.parse(JSON.stringify(comedyMovies)),
+            horrorMovies: JSON.parse(JSON.stringify(horrorMovies)),
+            romanceMovies: JSON.parse(JSON.stringify(romanceMovies)),
+            documentariesMovies: JSON.parse(
+                JSON.stringify(documentariesMovies)
+            ),
         },
     };
 }
