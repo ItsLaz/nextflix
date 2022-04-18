@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 
 import styles from '../../styles/Video.module.css';
+import Navbar from '../../components/Navbar/Navbar';
 
 import { getYoutubeVideoById, getYoutubeVideoId } from '../../lib/videos';
 
@@ -38,6 +39,8 @@ const Video = ({ youtubeVideo, videoId }) => {
 
     return (
         <div className={styles.container}>
+            <Navbar />
+
             <Modal
                 isOpen={true}
                 contentLabel="Watch the video"
