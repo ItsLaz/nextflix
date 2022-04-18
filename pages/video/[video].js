@@ -2,22 +2,48 @@ import { useRouter } from 'next/router';
 
 import styles from '../../styles/Video.module.css';
 
+import { getYoutubeVideoById, getYoutubeVideoId } from '../../lib/videos';
+
 import Modal from 'react-modal';
 Modal.setAppElement('#__next');
 
-const Video = () => {
+export async function getStaticProps() {
+    // const video = {
+    //     title: 'Shrek',
+    //     publishTime: '2000-01-01',
+    //     description:
+    //         'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempore aut accusamus explicabo est animi suscipit. Quibusdam impedit repellendus, voluptatibus inventore ipsa, sint fuga ut explicabo quisquam aut atque iusto eligendi!',
+    //     channelTitle: 'Dreamworks',
+    //     viewCount: 10000,
+    // };
+    const videoId = await getYoutubeVideoId('shrek');
+    console.log(videoId);
+    const youtubeVideo = await getYoutubeVideoById(videoId);
+    console.log(youtubeVideo);
+
+    return {
+        props: {
+            youtubeVideo,
+        },
+        revalidate: 10,
+    };
+}
+
+export async function getStaticPaths() {
+    const listOfVideos = ['CwXOrWvPBPk', 'SbXIj2T-_uk', 'mnd7sFt5c3A'];
+
+    const paths = listOfVideos.map((video) => ({ params: { video } }));
+
+    return { paths, fallback: 'blocking' };
+}
+
+const Video = ({ youtubeVideo }) => {
     const router = useRouter();
     console.log(router.query);
+    console.log(youtubeVideo);
 
-    const video = {
-        title: 'Shrek',
-        publishTime: '2000-01-01',
-        description:
-            'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempore aut accusamus explicabo est animi suscipit. Quibusdam impedit repellendus, voluptatibus inventore ipsa, sint fuga ut explicabo quisquam aut atque iusto eligendi!',
-        channelTitle: 'Dreamworks',
-        viewCount: 10000,
-    };
-    const { title, publishTime, description, channelTitle, viewCount } = video;
+    const { title, description, channelTitle } = youtubeVideo.snippet;
+    const { viewCount } = youtubeVideo.statistics;
 
     return (
         <div className={styles.container}>
@@ -41,13 +67,14 @@ const Video = () => {
                 <div className={styles.modalBody}>
                     <div className={styles.modalBodyContent}>
                         <div className={styles.col1}>
-                            <p className={styles.publishTime}>{publishTime}</p>
                             <p className={styles.title}>{title}</p>
                             <p className={styles.description}>{description}</p>
                         </div>
                         <div className={styles.col2}>
                             <p className={styles.subText}>
-                                <span className={styles.textColor}>Cast: </span>
+                                <span className={styles.textColor}>
+                                    Provided By:
+                                </span>
                                 <span className={styles.channelTitle}>
                                     {channelTitle}
                                 </span>
