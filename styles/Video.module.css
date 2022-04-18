@@ -35,7 +35,7 @@
 
 .videoPlayer {
     border-radius: 10px 10px 0px 0px;
-    /* composes: borderBoxShadow; */
+    composes: borderBoxShadow;
 }
 
 .modalBody {
@@ -84,15 +84,14 @@
     font-size: 0.875rem;
     line-height: 1.25rem;
     margin-left: 0;
-    overflow-wrap: break-word;
-}
-
-.subTextWrapper {
     margin-top: 1.5rem;
+
+    overflow-wrap: break-word;
 }
 
 .textColor {
     color: var(--gray10);
+    margin-right: 0.5rem;
 }
 
 .channelTitle {
