@@ -7,19 +7,9 @@ import { getYoutubeVideoById, getYoutubeVideoId } from '../../lib/videos';
 import Modal from 'react-modal';
 Modal.setAppElement('#__next');
 
-export async function getStaticProps() {
-    // const video = {
-    //     title: 'Shrek',
-    //     publishTime: '2000-01-01',
-    //     description:
-    //         'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tempore aut accusamus explicabo est animi suscipit. Quibusdam impedit repellendus, voluptatibus inventore ipsa, sint fuga ut explicabo quisquam aut atque iusto eligendi!',
-    //     channelTitle: 'Dreamworks',
-    //     viewCount: 10000,
-    // };
-    const videoId = await getYoutubeVideoId('shrek');
-    console.log(videoId);
+export async function getStaticProps(context) {
+    const videoId = await getYoutubeVideoId(context.params.video);
     const youtubeVideo = await getYoutubeVideoById(videoId);
-    console.log(youtubeVideo);
 
     return {
         props: {
