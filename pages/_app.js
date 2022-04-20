@@ -21,6 +21,7 @@ function MyApp({ Component, pageProps }) {
             }
         };
         isLogged();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     useEffect(() => {
