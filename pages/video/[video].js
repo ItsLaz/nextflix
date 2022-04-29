@@ -1,12 +1,12 @@
-import { useRouter } from 'next/router';
+import { useRouter } from "next/router";
 
-import styles from '../../styles/Video.module.css';
-import Navbar from '../../components/Navbar/Navbar';
+import styles from "../../styles/Video.module.css";
+import Navbar from "../../components/Navbar/Navbar";
 
-import { getYoutubeVideoById, getYoutubeVideoId } from '../../lib/videos';
+import { getYoutubeVideoById, getYoutubeVideoId } from "../../lib/videos";
 
-import Modal from 'react-modal';
-Modal.setAppElement('#__next');
+import Modal from "react-modal";
+Modal.setAppElement("#__next");
 
 export async function getStaticProps(context) {
     const videoId = await getYoutubeVideoId(context.params.video);
@@ -22,17 +22,15 @@ export async function getStaticProps(context) {
 }
 
 export async function getStaticPaths() {
-    const listOfVideos = ['CwXOrWvPBPk', 'SbXIj2T-_uk', 'mnd7sFt5c3A'];
+    const listOfVideos = ["CwXOrWvPBPk", "SbXIj2T-_uk", "mnd7sFt5c3A"];
 
     const paths = listOfVideos.map((video) => ({ params: { video } }));
 
-    return { paths, fallback: 'blocking' };
+    return { paths, fallback: "blocking" };
 }
 
 const Video = ({ youtubeVideo, videoId }) => {
     const router = useRouter();
-    console.log(router.query);
-    console.log(youtubeVideo);
 
     const { title, description, channelTitle } = youtubeVideo.snippet;
     const { viewCount } = youtubeVideo.statistics;

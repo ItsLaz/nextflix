@@ -1,29 +1,28 @@
-import styles from './Navbar.module.css';
+import styles from "./Navbar.module.css";
 
-import { useRouter } from 'next/router';
-import Link from 'next/link';
-import Image from 'next/image';
+import { useRouter } from "next/router";
+import Link from "next/link";
+import Image from "next/image";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
-import { magic } from '../../lib/magic-client';
+import { magic } from "../../lib/magic-client";
 
 const Navbar = () => {
     const router = useRouter();
     const [showDropdown, setShowDropdown] = useState(false);
-    const [username, setUsername] = useState('');
+    const [username, setUsername] = useState("");
 
     useEffect(() => {
         const fetchEmail = async () => {
             try {
                 const { email } = await magic.user.getMetadata();
                 const didToken = await magic.user.getIdToken();
-                console.log(didToken);
                 if (email) {
                     setUsername(email);
                 }
             } catch (error) {
-                console.error('Error retrieving email', error);
+                console.error("Error retrieving email", error);
             }
         };
         fetchEmail();
@@ -31,11 +30,11 @@ const Navbar = () => {
 
     const handleOnClickHome = (e) => {
         e.preventDefault();
-        router.push('/');
+        router.push("/");
     };
     const handleOnClickList = (e) => {
         e.preventDefault();
-        router.push('/browse/my-list');
+        router.push("/browse/my-list");
     };
     const handleShowDropdown = (e) => {
         e.preventDefault();
@@ -47,10 +46,10 @@ const Navbar = () => {
 
         try {
             await magic.user.logout();
-            router.push('/login');
+            router.push("/login");
         } catch (error) {
-            console.error('Something went wrong logging out', error);
-            router.push('/login');
+            console.error("Something went wrong logging out", error);
+            router.push("/login");
         }
     };
 
