@@ -6,9 +6,6 @@ import Navbar from "../components/Navbar/Navbar";
 import styles from "../styles/Home.module.css";
 import SectionCards from "../components/SectionCards/SectionCards";
 
-import { magic } from "../lib/magic-client";
-import { startFetchMyQuery } from "../lib/db/hasura";
-
 import {
     getNetflixOriginals,
     getTopRated,
@@ -53,7 +50,6 @@ export default function Home({
     romanceMovies,
     documentariesMovies,
 }) {
-    startFetchMyQuery();
     return (
         <div className={styles.container}>
             <Head>
