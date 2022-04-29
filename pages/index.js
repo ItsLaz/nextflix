@@ -1,20 +1,21 @@
-import Head from 'next/head';
+import Head from "next/head";
 
-import Banner from '../components/banner/Banner';
-import Navbar from '../components/Navbar/Navbar';
+import Banner from "../components/banner/Banner";
+import Navbar from "../components/Navbar/Navbar";
 
-import styles from '../styles/Home.module.css';
-import SectionCards from '../components/SectionCards/SectionCards';
+import styles from "../styles/Home.module.css";
+import SectionCards from "../components/SectionCards/SectionCards";
 
-import { magic } from '../lib/magic-client';
+import { magic } from "../lib/magic-client";
+import { startFetchMyQuery } from "../lib/db/hasura";
 
 import {
     getNetflixOriginals,
     getTopRated,
     getTrending,
     getVideos,
-} from '../lib/videos';
-import requests from '../lib/requests';
+} from "../lib/videos";
+import requests from "../lib/requests";
 
 export async function getServerSideProps() {
     const trending = await getTrending();
@@ -52,6 +53,7 @@ export default function Home({
     romanceMovies,
     documentariesMovies,
 }) {
+    startFetchMyQuery();
     return (
         <div className={styles.container}>
             <Head>
