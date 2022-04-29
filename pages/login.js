@@ -1,17 +1,17 @@
-import Head from 'next/head';
-import Image from 'next/image';
-import Link from 'next/link';
-import { useRouter } from 'next/router';
+import Head from "next/head";
+import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/router";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
-import styles from '../styles/Login.module.css';
+import styles from "../styles/Login.module.css";
 
-import { magic } from '../lib/magic-client';
+import { magic } from "../lib/magic-client";
 
 const Login = () => {
-    const [userMsg, setUserMsg] = useState('');
-    const [email, setEmail] = useState('');
+    const [userMsg, setUserMsg] = useState("");
+    const [email, setEmail] = useState("");
     const [isLoading, setIsLoading] = useState(false);
 
     const router = useRouter();
@@ -20,17 +20,17 @@ const Login = () => {
         const handleComplete = () => {
             setIsLoading(false);
         };
-        router.events.on('routeChangeComplete', handleComplete);
-        router.events.on('routeChangeError', handleComplete);
+        router.events.on("routeChangeComplete", handleComplete);
+        router.events.on("routeChangeError", handleComplete);
 
         return () => {
-            router.events.off('routeChangeComplete', handleComplete);
-            router.events.off('routeChangeError', handleComplete);
+            router.events.off("routeChangeComplete", handleComplete);
+            router.events.off("routeChangeError", handleComplete);
         };
     }, [router]);
 
     const handleOnChangeEmail = (e) => {
-        setUserMsg('');
+        setUserMsg("");
         const email = e.target.value;
         setEmail(email);
     };
@@ -39,30 +39,36 @@ const Login = () => {
         e.preventDefault();
 
         if (email) {
-            // go to dashboard
-            if (email) {
-                try {
-                    setIsLoading(true);
+            try {
+                setIsLoading(true);
 
-                    const didToken = await magic.auth.loginWithMagicLink({
-                        email,
+                const didToken = await magic.auth.loginWithMagicLink({
+                    email,
+                });
+                console.log({ didToken });
+                if (didToken) {
+                    const response = await fetch("/api/login", {
+                        method: "POST",
+                        headers: {
+                            Authorization: `Bearer ${didToken}`,
+                            "Content-Type": "application/json",
+                        },
                     });
-                    console.log({ didToken });
-                    if (didToken) {
+                    const loggedInResponse = await response.json();
+                    if (loggedInResponse.done) {
+                        router.push("/");
+                    } else {
                         setIsLoading(false);
-                        router.push('/');
+                        setUserMsg("Something went wrong logging in");
                     }
-                } catch (error) {
-                    console.error('login error', error);
-                    setIsLoading(false);
                 }
-            } else {
+            } catch (error) {
+                console.error("login error", error);
                 setIsLoading(false);
-                setUserMsg('Something went wrong logging in');
             }
         } else {
             setIsLoading(false);
-            setUserMsg('Enter a valid email address');
+            setUserMsg("Enter a valid email address");
         }
     };
 
@@ -100,7 +106,7 @@ const Login = () => {
                         onClick={handleLoginWithEmail}
                         className={styles.loginBtn}
                     >
-                        {isLoading ? 'Loading...' : 'Sign In'}
+                        {isLoading ? "Loading..." : "Sign In"}
                     </button>
                 </div>
             </main>
