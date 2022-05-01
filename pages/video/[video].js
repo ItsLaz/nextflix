@@ -13,13 +13,13 @@ import Modal from "react-modal";
 Modal.setAppElement("#__next");
 
 export async function getStaticProps(context) {
-    const videoId = await getYoutubeVideoId(context.params.video);
-    const youtubeVideo = await getYoutubeVideoById(videoId);
+    const youtubeVideoId = await getYoutubeVideoId(context.params.video);
+    const youtubeVideo = await getYoutubeVideoById(youtubeVideoId);
 
     return {
         props: {
             youtubeVideo,
-            videoId,
+            youtubeVideoId,
         },
         revalidate: 10,
     };
@@ -33,8 +33,9 @@ export async function getStaticPaths() {
     return { paths, fallback: "blocking" };
 }
 
-const Video = ({ youtubeVideo, videoId }) => {
+const Video = ({ youtubeVideo, youtubeVideoId }) => {
     const router = useRouter();
+    const videoId = router.query.video;
 
     const [toggleLike, setToggleLike] = useState(false);
     const [toggleDisLike, setToggleDisLike] = useState(false);
@@ -42,13 +43,34 @@ const Video = ({ youtubeVideo, videoId }) => {
     const { title, description, channelTitle } = youtubeVideo.snippet;
     const { viewCount } = youtubeVideo.statistics;
 
-    const handleToggleLike = () => {
+    const runRatingService = async (favorited) => {
+        return await fetch("/api/stats", {
+            method: "POST",
+            body: JSON.stringify({
+                videoId,
+                favorited,
+            }),
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
+    };
+
+    const handleToggleLike = async () => {
         setToggleLike(!toggleLike);
         setToggleDisLike(toggleLike);
+
+        const val = !toggleLike;
+        const favorited = val ? 1 : 0;
+        const response = await runRatingService(favorited);
     };
-    const handletoggleDisLike = () => {
+    const handletoggleDisLike = async () => {
         setToggleDisLike(!toggleDisLike);
         setToggleLike(toggleDisLike);
+
+        const val = !toggleDisLike;
+        const favorited = val ? 0 : 1;
+        const response = await runRatingService(favorited);
     };
 
     return (
@@ -68,7 +90,7 @@ const Video = ({ youtubeVideo, videoId }) => {
                     type="text/html"
                     width="100%"
                     height="390"
-                    src={`http://www.youtube.com/embed/${videoId}?enablejsapi=1&origin=http://example.com&controls=0&rel=0`}
+                    src={`http://www.youtube.com/embed/${youtubeVideoId}?enablejsapi=1&origin=http://example.com&controls=0&rel=0`}
                     frameBorder="0"
                 ></iframe>
                 <div className={styles.likeDislikeBtnWrapper}>
