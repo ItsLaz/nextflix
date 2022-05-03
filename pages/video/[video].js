@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import styles from "../../styles/Video.module.css";
 import Navbar from "../../components/Navbar/Navbar";
@@ -42,6 +42,25 @@ const Video = ({ youtubeVideo, youtubeVideoId }) => {
 
     const { title, description, channelTitle } = youtubeVideo.snippet;
     const { viewCount } = youtubeVideo.statistics;
+
+    useEffect(() => {
+        const getVideoLikes = async () => {
+            const response = await fetch(`/api/stats?videoId=${videoId}`, {
+                method: "GET",
+            });
+            const data = await response.json();
+            console.log({ data });
+            if (data.length > 0) {
+                const favorited = data[0].favorited;
+                if (favorited === 1) {
+                    setToggleLike(true);
+                } else if (favorited === 0) {
+                    setToggleDisLike(true);
+                }
+            }
+        };
+        getVideoLikes();
+    }, []);
 
     const runRatingService = async (favorited) => {
         return await fetch("/api/stats", {
