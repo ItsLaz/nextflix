@@ -11,10 +11,25 @@ import {
     getTopRated,
     getTrending,
     getVideos,
+    getWatchItAgainVideos,
 } from "../lib/videos";
 import requests from "../lib/requests";
+import { verifyToken } from "../lib/utils";
 
-export async function getServerSideProps() {
+export async function getServerSideProps(context) {
+    const userId = await verifyToken(token);
+    const token = context.req ? context.req?.cookies.token : null;
+
+    if (!userId) {
+        return {
+            props: {},
+            redirect: {
+                destination: "/login",
+                permanent: false,
+            },
+        };
+    }
+
     const trending = await getTrending();
     const netflixOriginals = await getNetflixOriginals();
     const topRated = await getTopRated();
@@ -23,9 +38,11 @@ export async function getServerSideProps() {
     const horrorMovies = await getVideos(requests.fetchHorrorMovies);
     const romanceMovies = await getVideos(requests.fetchRomanceMovies);
     const documentariesMovies = await getVideos(requests.fetchDocumentaries);
+    const watchItAgainVideos = await getWatchItAgainVideos(userId, token);
 
     return {
         props: {
+            watchItAgainVideos,
             trending: JSON.parse(JSON.stringify(trending)),
             netflixOriginals: JSON.parse(JSON.stringify(netflixOriginals)),
             topRated: JSON.parse(JSON.stringify(topRated)),
@@ -41,6 +58,7 @@ export async function getServerSideProps() {
 }
 
 export default function Home({
+    watchItAgainVideos,
     trending,
     netflixOriginals,
     topRated,
@@ -71,6 +89,11 @@ export default function Home({
                 />
 
                 <div className={styles.sectionWrapper}>
+                    <SectionCards
+                        title="Watch it again"
+                        videos={watchItAgainVideos}
+                        size="large"
+                    />
                     <SectionCards
                         title="Netflix Originals"
                         videos={netflixOriginals}

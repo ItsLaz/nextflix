@@ -1,7 +1,7 @@
-import styles from './SectionCards.module.css';
-import Card from '../Card/Card';
+import styles from "./SectionCards.module.css";
+import Card from "../Card/Card";
 
-import Link from 'next/link';
+import Link from "next/link";
 
 const SectionCards = (props) => {
     const { title, videos = [], size } = props;

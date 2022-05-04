@@ -5,6 +5,7 @@ import {
     insertStats,
     updateStats,
 } from "../../lib/db/hasura";
+import { verifyToken } from "../../lib/utils";
 
 export default async function stats(req, res) {
     try {
@@ -14,8 +15,7 @@ export default async function stats(req, res) {
         } else {
             const { videoId } = req.method === "POST" ? req.body : req.query;
             if (videoId) {
-                const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
-                const userId = decodedToken.issuer;
+                const userId = await verifyToken(token);
                 const findVideo = await findVideoIdByUser(
                     token,
                     userId,
