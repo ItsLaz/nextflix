@@ -1,5 +1,3 @@
-import jwt from "jsonwebtoken";
-
 import {
     findVideoIdByUser,
     insertStats,
@@ -23,13 +21,14 @@ export default async function stats(req, res) {
                 );
                 const doesStatsExist = findVideo?.length > 0;
                 if (req.method === "POST") {
-                    const { watched = true, favorited } = req.body;
+                    const { watched = true, favorited, imgUrl } = req.body;
                     if (doesStatsExist) {
                         const response = await updateStats(token, {
                             favorited,
                             watched,
                             userId,
                             videoId,
+                            imgUrl,
                         });
                         res.send({ msg: "it works", response });
                     } else {
@@ -38,6 +37,7 @@ export default async function stats(req, res) {
                             watched,
                             userId,
                             videoId,
+                            imgUrl,
                         });
                         res.send({ msg: "it works", response });
                     }

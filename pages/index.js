@@ -17,9 +17,8 @@ import requests from "../lib/requests";
 import { verifyToken } from "../lib/utils";
 
 export async function getServerSideProps(context) {
-    const userId = await verifyToken(token);
     const token = context.req ? context.req?.cookies.token : null;
-
+    const userId = await verifyToken(token);
     if (!userId) {
         return {
             props: {},
@@ -29,6 +28,7 @@ export async function getServerSideProps(context) {
             },
         };
     }
+    const watchItAgainVideos = await getWatchItAgainVideos(userId, token);
 
     const trending = await getTrending();
     const netflixOriginals = await getNetflixOriginals();
@@ -38,7 +38,6 @@ export async function getServerSideProps(context) {
     const horrorMovies = await getVideos(requests.fetchHorrorMovies);
     const romanceMovies = await getVideos(requests.fetchRomanceMovies);
     const documentariesMovies = await getVideos(requests.fetchDocumentaries);
-    const watchItAgainVideos = await getWatchItAgainVideos(userId, token);
 
     return {
         props: {

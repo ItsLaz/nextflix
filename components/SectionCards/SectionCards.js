@@ -12,7 +12,14 @@ const SectionCards = (props) => {
             <div className={styles.cardWrapper}>
                 {videos.map((video, i) => {
                     return (
-                        <Link href={`/video/${video.title}`} key={i} passHref>
+                        <Link
+                            href={{
+                                pathname: `/video/${video.title}`,
+                                query: { imgUrl: video.imgUrl },
+                            }}
+                            key={i}
+                            passHref
+                        >
                             <a>
                                 <Card
                                     id={i}

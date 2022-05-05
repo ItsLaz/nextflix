@@ -36,6 +36,7 @@ export async function getStaticPaths() {
 const Video = ({ youtubeVideo, youtubeVideoId }) => {
     const router = useRouter();
     const videoId = router.query.video;
+    const imgUrl = router.query.imgUrl;
 
     const [toggleLike, setToggleLike] = useState(false);
     const [toggleDisLike, setToggleDisLike] = useState(false);
@@ -68,6 +69,7 @@ const Video = ({ youtubeVideo, youtubeVideoId }) => {
             body: JSON.stringify({
                 videoId,
                 favorited,
+                imgUrl,
             }),
             headers: {
                 "Content-Type": "application/json",
