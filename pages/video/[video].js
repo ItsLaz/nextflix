@@ -50,7 +50,6 @@ const Video = ({ youtubeVideo, youtubeVideoId }) => {
                 method: "GET",
             });
             const data = await response.json();
-            console.log({ data });
             if (data.length > 0) {
                 const favorited = data[0].favorited;
                 if (favorited === 1) {

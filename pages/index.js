@@ -67,6 +67,9 @@ export default function Home({
     romanceMovies,
     documentariesMovies,
 }) {
+    const randomNumBetween20 = Math.floor(Math.random() * (20 - 1) + 1);
+    const randomBannerMovie = trending[randomNumBetween20];
+
     return (
         <div className={styles.container}>
             <Head>
@@ -82,17 +85,20 @@ export default function Home({
                 <Navbar />
 
                 <Banner
-                    title="Shrek"
-                    subTitle="big green ogre AUUUGHH"
-                    imgUrl="/static/shrek.jpg"
+                    title={randomBannerMovie.title}
+                    subTitle={randomBannerMovie.overview}
+                    imgUrl={randomBannerMovie.bannerImg}
                 />
 
                 <div className={styles.sectionWrapper}>
-                    <SectionCards
-                        title="Watch it again"
-                        videos={watchItAgainVideos}
-                        size="large"
-                    />
+                    {watchItAgainVideos.length > 0 && (
+                        <SectionCards
+                            title="Watch it again"
+                            videos={watchItAgainVideos}
+                            size="large"
+                        />
+                    )}
+
                     <SectionCards
                         title="Netflix Originals"
                         videos={netflixOriginals}
