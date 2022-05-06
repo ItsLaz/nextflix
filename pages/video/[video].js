@@ -61,6 +61,7 @@ const Video = ({ youtubeVideo, youtubeVideoId }) => {
             }
         };
         getVideoLikes();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const runRatingService = async (favorited) => {
